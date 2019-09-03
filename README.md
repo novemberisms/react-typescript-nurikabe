@@ -1,4 +1,4 @@
-# React-Typescript Sample App
+# React-Typescript Nurikabe App
 
 This is a personal frontend project for learning to use React and Typescript. 
 
