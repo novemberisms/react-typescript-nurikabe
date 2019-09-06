@@ -1,5 +1,6 @@
 import React, { Component, ReactNode } from "react"
 import Square from "./Square"
+import BoardModel from "./models/BoardModel"
 import "./Board.css"
 
 type BoardProps = {
@@ -8,7 +9,7 @@ type BoardProps = {
 }
 
 type BoardState = {
-
+    board: BoardModel
 }
 
 export default class Board extends Component<BoardProps, BoardState> {
@@ -16,20 +17,21 @@ export default class Board extends Component<BoardProps, BoardState> {
     public constructor(props: BoardProps) {
         super(props)
         this.state = {
-
+            board: new BoardModel(this.props.width, this.props.height)
         }
     }
 
-    public render = (): ReactNode => {
-        return (
-            <div className="board-container">
-                {this.generateSquares()}
-            </div>
-        )
-    }
-
     private handleSquareClick = (x: number, y: number): void => {
-        console.log(`${x} ${y}`)
+        this.setState((prevState, props) => {
+            const newBoard = prevState.board.cloneAndModify(x, y, cell => {
+                if (cell.number !== 0) return cell; // no modification
+                cell.filled = !cell.filled
+                return cell
+            })
+            return {
+                board: newBoard
+            }
+        })
     }
 
     private generateSquares = (): Array<ReactNode> => {
@@ -47,15 +49,26 @@ export default class Board extends Component<BoardProps, BoardState> {
     private generateRow = (y: number): Array<ReactNode> => {
         const result = new Array<ReactNode>();
         for (let x = 0; x < this.props.width; x++) {
+            
+            const cell = this.state.board.getCellClone(x, y)
+
             result.push(<Square 
                 x={x} y={y}
                 key={x}
-                number={0}
-                filled={(x+y) % 2 === 0}
-                dot={true}
+                number={cell.number}
+                filled={cell.filled}
+                dot={cell.dotted}
                 onClick={this.handleSquareClick}
             />)
         }
         return result;
+    }
+
+    public render = (): ReactNode => {
+        return (
+            <div className="board-container">
+                {this.generateSquares()}
+            </div>
+        )
     }
 }

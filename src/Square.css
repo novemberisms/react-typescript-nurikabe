@@ -8,6 +8,7 @@
     height: 40px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     font-size: 28px;
+    cursor: pointer;
 }
 
 .square:hover {

@@ -2,12 +2,12 @@ import React from "react"
 import "./Square.css"
 
 type SquareProps = {
-    x: number;
-    y: number;
-    filled: boolean;
-    dot: boolean;
-    number: number;
-    onClick: (x: number, y: number) => void;
+    x: number
+    y: number
+    filled: boolean
+    dot: boolean
+    number: number
+    onClick: (x: number, y: number) => void
 }
 
 // NOTE that this is a special space character that looks like a space 
@@ -28,7 +28,7 @@ export default function Square(props: SquareProps) {
         ? dot 
         : props.number === 0
             ? specialSpace
-            : props.number
+            : String(props.number)
 
     const handleClick = () => props.onClick(props.x, props.y)
 
