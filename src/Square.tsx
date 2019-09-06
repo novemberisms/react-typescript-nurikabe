@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import "./Square.css"
 
 type SquareProps = {
@@ -10,8 +10,8 @@ type SquareProps = {
     onClick: (x: number, y: number) => void;
 }
 
-// NOTE that this is a special space character that does not look like
-// any character but does not count as a space either. This was copy-pasted
+// NOTE that this is a special space character that looks like a space 
+// but does not count as one. This was copy-pasted
 // from https://www.brunildo.org/test/space-chars.html
 // since using a regular space for some reason would mess up the vertical
 // spacing of the rows containing these squares
