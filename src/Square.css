@@ -1,0 +1,22 @@
+.square {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 3px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    font-size: 28px;
+}
+
+.square:hover {
+    -webkit-box-shadow:inset 0px 0px 10px 5px slategrey;
+    -moz-box-shadow:inset 0px 0px 10px 5px slategrey;
+    box-shadow:inset 0px 0px 10px 5px slategrey;
+}
+
+.filled {
+    background-color: black;
+    color: white;
+}

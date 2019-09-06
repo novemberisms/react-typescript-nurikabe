@@ -1,4 +1,5 @@
 import React, { Component, ReactNode } from "react"
+import Square from "./Square"
 import "./Board.css"
 
 type BoardProps = {
@@ -19,18 +20,22 @@ export default class Board extends Component<BoardProps, BoardState> {
         }
     }
 
-    public render(): ReactNode {
+    public render = (): ReactNode => {
         return (
-            <div>
+            <div className="board-container">
                 {this.generateSquares()}
             </div>
         )
     }
 
-    private generateSquares(): Array<ReactNode> {
+    private handleSquareClick = (x: number, y: number): void => {
+        console.log(`${x} ${y}`)
+    }
+
+    private generateSquares = (): Array<ReactNode> => {
         const result = new Array<ReactNode>();
         for (let y = 0; y < this.props.height; y++) {
-            const row = <div className="row" key={y}>
+            const row = <div className="board-row" key={y}>
                 {this.generateRow(y)}
             </div>
 
@@ -39,22 +44,18 @@ export default class Board extends Component<BoardProps, BoardState> {
         return result
     }
 
-    private generateRow(y: number): Array<ReactNode> {
+    private generateRow = (y: number): Array<ReactNode> => {
         const result = new Array<ReactNode>();
         for (let x = 0; x < this.props.width; x++) {
-            result.push(
-                <span 
-                    className="square" 
-                    key={x} 
-                    onMouseEnter={() => this.onMouseOver(x, y)}>
-                        x
-                </span>
-            )
+            result.push(<Square 
+                x={x} y={y}
+                key={x}
+                number={0}
+                filled={(x+y) % 2 === 0}
+                dot={true}
+                onClick={this.handleSquareClick}
+            />)
         }
         return result;
-    }
-
-    private onMouseOver(x: number, y: number) {
-        console.log(`${x}, ${y}`)
     }
 }
