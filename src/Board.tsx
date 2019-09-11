@@ -2,6 +2,7 @@ import React, { Component, ReactNode } from "react"
 import Square from "./Square"
 import BoardModel from "./models/BoardModel"
 import "./Board.css"
+import NurikabeGenerator from "./generator/NurikabeGenerator"
 
 type BoardProps = {
     width: number;
@@ -16,8 +17,11 @@ export default class Board extends Component<BoardProps, BoardState> {
 
     public constructor(props: BoardProps) {
         super(props)
+
+        const generator = new NurikabeGenerator(this.props.width, this.props.height)
+
         this.state = {
-            board: new BoardModel(this.props.width, this.props.height)
+            board: generator.generate(),
         }
     }
 
